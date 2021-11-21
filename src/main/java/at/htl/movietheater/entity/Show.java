@@ -2,16 +2,29 @@ package at.htl.movietheater.entity;
 
 import javax.persistence.*;
 
+@Entity(name = "MT_SHOW")
+@SequenceGenerator(name = "showSeq", initialValue = 1000)
 public class Show {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SH_ID")
     private Long id;
 
+    @JoinColumn(name = "SH_MO_ID")
+    @ManyToOne
     private Movie movie;
 
+    @JoinColumn(name = "SH_TH_ID")
+    @ManyToOne
     private Theater theater;
 
+    @JoinColumn(name = "SH_PREV_SHOW_ID")
+    @OneToOne
     private Show prevShow;
 
+    @JoinColumn(name = "SH_NEXT_SHOW_ID")
+    @OneToOne
     private Show nextShow;
 
     public Show() {
