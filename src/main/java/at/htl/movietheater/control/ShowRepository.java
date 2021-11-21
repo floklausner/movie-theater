@@ -2,6 +2,9 @@ package at.htl.movietheater.control;
 
 import at.htl.movietheater.entity.Show;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class ShowRepository {
 
     public Show save(Show show) {

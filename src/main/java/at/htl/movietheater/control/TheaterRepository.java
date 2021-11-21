@@ -2,6 +2,9 @@ package at.htl.movietheater.control;
 
 import at.htl.movietheater.entity.Theater;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class TheaterRepository {
 
     /**
