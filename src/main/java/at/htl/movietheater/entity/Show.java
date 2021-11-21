@@ -4,6 +4,12 @@ import javax.persistence.*;
 
 @Entity(name = "MT_SHOW")
 @SequenceGenerator(name = "showSeq", initialValue = 1000)
+@NamedQueries({
+        @NamedQuery(
+                name = "Show.findLastShow",
+                query = "select s from MT_SHOW s order by s.id desc"
+        )
+})
 public class Show {
 
     @Id

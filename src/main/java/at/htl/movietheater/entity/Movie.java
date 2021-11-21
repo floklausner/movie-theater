@@ -3,6 +3,12 @@ package at.htl.movietheater.entity;
 import javax.persistence.*;
 
 @Entity(name = "MT_MOVIE")
+@NamedQueries({
+        @NamedQuery(
+                name = "Movie.findByTitle",
+                query = "select m from MT_MOVIE m where m.title like :TITLE"
+        )
+})
 public class Movie {
 
     @Id

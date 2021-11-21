@@ -3,12 +3,33 @@ package at.htl.movietheater.control;
 import at.htl.movietheater.entity.Show;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 @ApplicationScoped
 public class ShowRepository {
 
+    @Inject
+    EntityManager entityManager;
+
+    @Transactional
     public Show save(Show show) {
-        return null;
+
+        if (show.getPrevShow() == null) {
+            show.setPrevShow(findLastShow());
+        }
+
+        entityManager.merge(show);
+
+
+        if (show.getPrevShow() != null) {
+            show.getPrevShow().setPrevShow(show);
+        }
+
+        return show;
     }
 
     /**
@@ -18,7 +39,15 @@ public class ShowRepository {
      * @return the last show stored in the db
      */
     public Show findLastShow() {
-        return null;
+
+        try {
+            TypedQuery<Show> showTypedQuery = entityManager
+                    .createNamedQuery("Show.findLastShow", Show.class)
+                    .setMaxResults(1);
+            return showTypedQuery.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     /**
@@ -28,6 +57,6 @@ public class ShowRepository {
      * @return the retrieved show
      */
     public Show findById(long id) {
-        return null;
+        return entityManager.find(Show.class, id);
     }
 }

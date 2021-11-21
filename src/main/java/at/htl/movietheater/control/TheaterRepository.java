@@ -3,9 +3,17 @@ package at.htl.movietheater.control;
 import at.htl.movietheater.entity.Theater;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 @ApplicationScoped
 public class TheaterRepository {
+
+    @Inject
+    EntityManager entityManager;
 
     /**
      * search the theater in the database.
@@ -16,8 +24,18 @@ public class TheaterRepository {
      * @return the existing theater, when theater.name already exists in db
      * or return the persisted theater, when not found in database
      */
+
+   @Transactional
     public Theater save(Theater theater) {
-        return null;
+
+        Theater theater1 = findByName(theater.getName());
+
+        if (theater1 != null) {
+            return theater1;
+        } else {
+            return entityManager.merge(theater);
+        }
+
     }
 
     /**
@@ -28,6 +46,13 @@ public class TheaterRepository {
      * @return the theater (with the given name) or null, when the name is not in the db
      */
     public Theater findByName(String name) {
-        return null;
+        try {
+            TypedQuery<Theater> theaterTypedQuery = entityManager
+                    .createNamedQuery("Theater.findByName", Theater.class)
+                    .setParameter("NAME", name);
+            return theaterTypedQuery.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }
