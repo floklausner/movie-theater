@@ -1,0 +1,26 @@
+package at.htl.movietheater.entity;
+
+public enum Genre {
+    ACTION,
+    COMEDY,
+    DRAMA,
+    HORROR,
+    THRILLER,
+    SCIFI,
+    DOCUMENTARY,
+    ANIMATION,
+    ROMANCE,
+    MUSIC,
+    MYSTERY,
+    FANTASY,
+    WAR,
+    WESTERN,
+    ADVENTURE,
+    SCIENCE_FICTION,
+    BIOGRAPHY,
+    CRIME,
+    FAMILY,
+    HISTORY,
+    MUSICAL,
+    SPORT,
+}

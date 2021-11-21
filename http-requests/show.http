@@ -1,0 +1,53 @@
+### should work
+POST http://localhost:8080/api/show
+Content-Type: application/json
+
+{
+  "movie": "Ein Junge Namens Weihnachten",
+  "theater": "S1"
+}
+
+### should work
+
+POST http://localhost:8080/api/show
+Content-Type: application/json
+
+[
+  {
+    "movie": "Eine Reise ins Verlies der Zeit",
+    "theater": "S4"
+  },
+  {
+    "movie": "Dune",
+    "theater": "S1"
+  },
+  {
+    "movie": "Last Night in Soho",
+    "theater": "S2"
+  }
+]
+
+### should not work
+POST http://localhost:8080/api/show
+Content-Type: application/json
+
+{
+  "movie": "Ein Junge Namens Weihnachten"
+}
+
+### should not work
+
+POST http://localhost:8080/api/show
+Content-Type: application/json
+
+[
+  {
+    "theater": "S4"
+  },
+  {
+
+  },
+  {
+    "movie": "Last Night in Soho"
+  }
+]
