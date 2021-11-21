@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Show {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "showSeq")
     @Column(name = "SH_ID")
     private Long id;
 
