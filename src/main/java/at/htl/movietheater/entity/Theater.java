@@ -10,7 +10,7 @@ public class Theater {
     @Column(name = "TH_ID")
     private Long id;
 
-    @Column(name = "TH_NAME")
+    @Column(name = "TH_NAME", unique = true)
     private String name;
 
     @Column(name = "TH_CAPACITY")
