@@ -6,6 +6,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+@Path("/show")
 public class ShowEndpoint {
 
     public Response create(JsonValue json, @Context UriInfo uri) {

@@ -22,8 +22,7 @@ public class ShowRepository {
             show.setPrevShow(findLastShow());
         }
 
-        entityManager.merge(show);
-
+        show = entityManager.merge(show);
 
         if (show.getPrevShow() != null) {
             show.getPrevShow().setPrevShow(show);
